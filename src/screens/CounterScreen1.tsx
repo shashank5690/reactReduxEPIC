@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementByTwo } from '../redux/slices/firstPageSlice';
 import { useNavigation } from '@react-navigation/native';
 import { RootState } from '../redux/store';
-
+import styles from './styles/styles';
 
 const CounterScreen1 = () => {
   const dispatch = useDispatch();
@@ -12,13 +12,25 @@ const CounterScreen1 = () => {
   const navigation = useNavigation<any>();
 
   return (
-    <View>
-      <Text>Counter Screen 1</Text>
-      <Text>Count: {count}</Text>
-      <Button title="Increment by 2" onPress={() => dispatch(incrementByTwo())} />
-      <Button title="Go to Counter Screen 2" onPress={() => navigation.navigate('CounterScreen2')} />
+    <View style={styles.container}>
+      <Text style={styles.header}>Counter Screen 1</Text>
+      <Text style={styles.count}>Count: {count}</Text>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => dispatch(incrementByTwo())}
+      >
+        <Text style={styles.buttonText}>Increment by 2</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => navigation.navigate('CounterScreen2')}
+      >
+        <Text style={styles.buttonText}>Go to Counter Screen 2</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+
 
 export default CounterScreen1;
